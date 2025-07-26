@@ -31,7 +31,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <div  id="projects" className="min-h-screen py-20 bg-[#f6f5f3] relative">
+    <div  id="projects" className="min-h-screen py-20 font-poppins bg-[#f6f5f3] relative">
            {/* Decorative Blobs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
         <div className="absolute top-24 left-16 w-40 h-40 rounded-full bg-amber-500 mix-blend-multiply filter blur-2xl animate-blob" />

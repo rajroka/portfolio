@@ -27,3 +27,16 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/poppins-reg.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}

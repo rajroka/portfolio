@@ -47,7 +47,7 @@ export default function Contact() {
   };
 
   return (
-    <div id="contact"  className="  relative min-h-screen py-20 bg-[#f6f5f3]">
+    <div id="contact"  className="  font-poppins  relative min-h-screen py-20 bg-[#f6f5f3]">
    <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
         <div className="absolute top-24 left-16 w-40 h-40 rounded-full bg-amber-500 mix-blend-multiply filter blur-2xl animate-blob" />
         <div className="absolute top-1/3 right-16 w-48 h-48 rounded-full bg-cyan-500 mix-blend-multiply filter blur-2xl animate-blob animation-delay-2000" />

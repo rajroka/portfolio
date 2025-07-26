@@ -48,14 +48,14 @@ export default function Hero() {
   smooth={true}
   duration={500}
   offset={-70} // Optional: adjust for fixed navbar
-  className="flex items-center gap-2 px-6 py-3 bg-[#161b22] text-white rounded-lg hover:bg-cyan-700 transition-all duration-300 shadow-md cursor-pointer"
+  className="flex items-center gap-2 px-6 py-3 bg-[#161b22] font-poppins text-white rounded-lg hover:bg-cyan-700 transition-all duration-300 shadow-md cursor-pointer"
 >
   <ArrowRight size={18} />
   Contact  
 </ScrollLink>
         </div>
         <div className="flex items-center flex-wrap gap-3 mt-6">
-          {['Next.js', 'React', 'Tailwind'].map((tech) => (
+          {['Next.js', 'React', 'Tailwind' , 'Mongodb' , 'Zustand' ,'Redux' , 'node'].map((tech) => (
             <span
               key={tech}
               className="px-3 py-1 text-white bg-gray-800 rounded-full text-sm font-medium shadow-sm"
