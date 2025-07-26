@@ -11,12 +11,12 @@ const Footer = () => {
     {
       name: 'GitHub',
       icon: <FiGithub />,
-      url: 'https://github.com/yourusername', // replace with your GitHub
+      url: 'https://github.com/rajroka', // replace with your GitHub
     },
     {
       name: 'LinkedIn',
       icon: <FiLinkedin />,
-      url: 'https://linkedin.com/in/yourusername', // replace with your LinkedIn
+      url: 'https://www.linkedin.com/in/raj-roka-4588501b9/', // replace with your LinkedIn
     },
     {
       name: 'Facebook',
@@ -26,7 +26,7 @@ const Footer = () => {
     {
       name: 'Email',
       icon: <FiMail />,
-      url: 'mailto:youremail@example.com', // replace with your email
+      url: 'ggcode30@gmail.com', // replace with your email
     },
   ];
 
