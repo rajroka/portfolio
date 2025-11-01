@@ -12,7 +12,7 @@ const projects = [
       "Full-stack e-commerce solution with Next.js, Stripe integration, and inventory management.",
     tags: ["Next.js", "Tailwind CSS", "Cloudinary", "Stripe", "MongoDB"],
     github: "https://github.com/rajroka/e-commerce.git",
-    live: "https://ggshop-vcns.vercel.app/",
+    live: "https://e-commerce-b7pd.vercel.app/",
   },
   {
     image: "/blog.png",
@@ -20,8 +20,8 @@ const projects = [
     description:
       "Full-stack blog platform with Next.js, Clerk authentication, and an admin dashboard.",
     tags: ["Next.js", "Tailwind CSS", "Cloudinary", "Clerk", "MongoDB"],
-    github: "https://github.com/rajroka/blog-platform",
-    live: "https://blog-platform-demo.vercel.app/",
+    github: "https://github.com/rajroka/blogging-site",
+    live: "https://blogging-site-gjf4.vercel.app/",
   },
   // {
   //   image: "/task.png",
