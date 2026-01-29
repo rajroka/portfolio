@@ -1,5 +1,4 @@
 'use client';
-
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
@@ -12,33 +11,24 @@ const projects = [
       "Full-stack e-commerce solution with Next.js, Stripe integration, and inventory management.",
     tags: ["Next.js", "Tailwind CSS", "Cloudinary", "Stripe", "MongoDB"],
     github: "https://github.com/rajroka/e-commerce.git",
-    live: "https://e-commerce-b7pd.vercel.app/",
+    live: "https://e-commerce-8ghl.vercel.app/", // updated link
   },
   {
-    image: "/blog.png",
+    image: "/Screenshot (155).png",
     title: "Blog Platform",
     description:
       "Full-stack blog platform with Next.js, Clerk authentication, and an admin dashboard.",
     tags: ["Next.js", "Tailwind CSS", "Cloudinary", "Clerk", "MongoDB"],
     github: "https://github.com/rajroka/blogging-site",
-    live: "https://blogging-site-gjf4.vercel.app/",
+    live: "https://blogging-site-gn4n.vercel.app/", // updated link
   },
-  // {
-  //   image: "/task.png",
-  //   title: "Task Management App",
-  //   description:
-  //     "A productivity app with Kanban-style task organization and real-time collaboration.",
-  //   tags: ["TypeScript", "React", "WebSockets"],
-  //   github: "https://github.com/rajroka/task-manager",
-  //   live: "https://taskmanager-demo.vercel.app/",
-  // },
 ];
 
 export default function Projects() {
   return (
     <div
       id="projects"
-      className="min-h-screen py-20 font-poppins bg-[#f6f5f3] relative"
+      className="min-h-screen py-20 px-6 md:px-12 lg:px-20 font-poppins bg-[#f6f5f3] relative"
     >
       {/* Decorative Blobs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
@@ -73,16 +63,18 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-[#161b22] rounded-lg overflow-hidden border border-[#30363d] hover:border-cyan-400 hover:scale-[1.02] transition-all duration-300 shadow-lg"
+              className="bg-[#161b22] rounded-xl overflow-hidden shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300"
             >
-              {/* Image Section */}
-              <div className="relative w-full h-52">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
+              {/* Image Section with padding */}
+              <div className="relative w-full h-52 bg-[#161b22] flex items-center justify-center p-4">
+                <div className="relative w-full h-full rounded-lg overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
               </div>
 
               {/* Text Section */}
@@ -90,13 +82,13 @@ export default function Projects() {
                 <h3 className="text-xl font-semibold text-[#f6f5f3] mb-2">
                   {project.title}
                 </h3>
-                <p className="text-gray-400 mb-4">{project.description}</p>
+                <p className="text-gray-300 mb-4">{project.description}</p>
 
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tags.map((tag, i) => (
                     <span
                       key={i}
-                      className="text-xs px-3 py-1 bg-[#0d1117] text-[#f6f5f3] rounded-full"
+                      className="text-xs px-3 py-1 bg-[#0d1117] text-[#f6f5f3] rounded-full hover:bg-cyan-500 hover:text-[#161b22] transition-colors"
                     >
                       {tag}
                     </span>
@@ -108,7 +100,7 @@ export default function Projects() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center text-sm text-gray-400 hover:text-cyan-400 transition-colors"
+                    className="flex items-center text-sm text-gray-300 hover:text-cyan-400 transition-colors"
                   >
                     <FiGithub className="mr-2" /> Code
                   </a>
@@ -116,7 +108,7 @@ export default function Projects() {
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center text-sm text-gray-400 hover:text-cyan-400 transition-colors"
+                    className="flex items-center text-sm text-gray-300 hover:text-cyan-400 transition-colors"
                   >
                     <FiExternalLink className="mr-2" /> Live Demo
                   </a>

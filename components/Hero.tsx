@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <div
       id="hero"
-      className="w-full min-h-screen bg-[#f6f5f3] px-6 md:px-12 py-14 lg:py-20 flex flex-col md:flex-row items-center justify-between relative overflow-hidden"
+      className="w-full min-h-screen bg-[#f6f5f3] px-6 md:px-12 lg:px-20  py-14 lg:py-20 flex flex-col md:flex-row items-center justify-between relative overflow-hidden"
     >
       {/* Decorative Blobs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
