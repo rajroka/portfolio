@@ -65,7 +65,7 @@ export default function Navbar() {
           </ScrollLink>
 
           <a
-            href="/Black Minimalist Professional CV Resume (1).pdf"
+            href="/rajroka-cv.pdf"
             download="Raj-Roka-CV.pdf"
             className=" bg-[#f6f5f3] hover:bg-gray-700 text-black  hover:text-white  py-2 px-5 rounded-md transition"
           >
