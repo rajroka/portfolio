@@ -1,123 +1,123 @@
 'use client';
+
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { FiGithub, FiExternalLink } from 'react-icons/fi';
+import { FiExternalLink } from 'react-icons/fi';
 
-const projects = [
+export interface ProjectData {
+  _id?: string;
+  image?: string;
+  title: string;
+  description: string;
+  tags: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+}
+
+const staticProjects: ProjectData[] = [
   {
-    image: "/ecom.png",
-    title: "E-Commerce Platform",
+    _id: '1',
+    image: '/ecom.png',
+    title: 'E-Commerce Platform',
     description:
-      "Full-stack e-commerce solution with Next.js, Stripe integration, and inventory management.",
-    tags: ["Next.js", "Tailwind CSS", "Cloudinary", "Stripe", "MongoDB"],
-    github: "https://github.com/rajroka/e-commerce.git",
-    live: "https://e-commerce-8ghl.vercel.app/", // updated link
+      'Full-stack e-commerce solution with Next.js, Stripe integration, and inventory management.',
+    tags: ['Next.js', 'Tailwind CSS', 'Stripe', 'MongoDB'],
+    githubUrl: 'https://github.com/rajroka/e-commerce.git',
+    liveUrl: 'https://e-commerce-8ghl.vercel.app/',
   },
   {
-    image: "/Screenshot (155).png",
-    title: "Blog Platform",
+    _id: '2',
+    image: '/Screenshot (155).png',
+    title: 'Blog Platform',
     description:
-      "Full-stack blog platform with Next.js, Clerk authentication, and an admin dashboard.",
-    tags: ["Next.js", "Tailwind CSS", "Cloudinary", "Clerk", "MongoDB"],
-    github: "https://github.com/rajroka/blogging-site",
-    live: "https://blogging-site-gn4n.vercel.app/", // updated link
+      'Full-stack blog platform with Next.js, Clerk authentication, and an admin dashboard.',
+    tags: ['Next.js', 'Tailwind CSS', 'Clerk', 'MongoDB'],
+    githubUrl: 'https://github.com/rajroka/blogging-site',
+    liveUrl: 'https://blogging-site-gn4n.vercel.app/',
+  },
+  {
+    _id: '3',
+    image: '/postsathi.png',
+    title: 'PostSathi',
+    description:
+      'A social media management system to schedule, manage, and track posts across platforms.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MongoDB'],
+    liveUrl: 'https://post-sathi.vercel.app/',
   },
 ];
 
-export default function Projects() {
-  return (
-    <div
-      id="projects"
-      className="min-h-screen py-20 px-6 md:px-12 lg:px-20 font-poppins bg-[#f6f5f3] relative"
-    >
-      {/* Decorative Blobs */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-        <div className="absolute top-24 left-16 w-40 h-40 rounded-full bg-amber-500 mix-blend-multiply filter blur-2xl animate-blob" />
-        <div className="absolute top-1/3 right-16 w-48 h-48 rounded-full bg-cyan-500 mix-blend-multiply filter blur-2xl animate-blob animation-delay-2000" />
-        <div className="absolute bottom-20 left-1/3 w-52 h-52 rounded-full bg-amber-600 mix-blend-multiply filter blur-2xl animate-blob animation-delay-4000" />
-      </div>
+interface ProjectsProps {
+  data?: ProjectData[] | null;
+}
 
-      <div className="container mx-auto px-6">
+export default function Projects({ data }: ProjectsProps) {
+  const projects = data && data.length > 0 ? data : staticProjects;
+
+  return (
+    <section id="projects" className="py-20 px-6 md:px-16 lg:px-28 bg-white">
+      <div className="max-w-6xl mx-auto">
+
         {/* Section Title */}
-        <motion.div
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-4xl md:text-5xl font-black text-gray-900 mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#161b22] mb-4">
-            My <span className="text-[#161b22]">Projects</span>
-          </h2>
-          <p className="text-[#161b22] max-w-2xl mx-auto text-lg">
-            Here are some of my recent works. Each project was built to solve
-            real-world problems and strengthen my full-stack development skills.
-          </p>
-        </motion.div>
+          Projects<span className="text-cyan-700">.</span>
+        </motion.h2>
 
-        {/* Project Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Project Grid */}
+        <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <motion.div
-              key={index}
+              key={project._id ?? index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-[#161b22] rounded-xl overflow-hidden shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group"
             >
-              {/* Image Section with padding */}
-              <div className="relative w-full h-52 bg-[#161b22] flex items-center justify-center p-4">
-                <div className="relative w-full h-full rounded-lg overflow-hidden">
+              {/* Image container — gray bg with cyan accent corner */}
+              <div className="relative w-full h-52 bg-gray-100 rounded-xl overflow-hidden mb-4">
+                {project.image ? (
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-contain"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                </div>
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+                    No image
+                  </div>
+                )}
+              
               </div>
 
-              {/* Text Section */}
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-[#f6f5f3] mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-gray-300 mb-4">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="text-xs px-3 py-1 bg-[#0d1117] text-[#f6f5f3] rounded-full hover:bg-cyan-500 hover:text-[#161b22] transition-colors"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex space-x-4">
+              {/* Title + link */}
+              <div className="flex items-center gap-2 mb-1">
+                <h3 className="text-lg font-bold text-gray-900">{project.title}</h3>
+                {project.liveUrl && (
                   <a
-                    href={project.github}
+                    href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center text-sm text-gray-300 hover:text-cyan-400 transition-colors"
+                    className="text-gray-400 hover:text-cyan-700 transition-colors"
+                    aria-label="Live site"
                   >
-                    <FiGithub className="mr-2" /> Code
+                    <FiExternalLink size={15} />
                   </a>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-sm text-gray-300 hover:text-cyan-400 transition-colors"
-                  >
-                    <FiExternalLink className="mr-2" /> Live Demo
-                  </a>
-                </div>
+                )}
               </div>
+
+              {/* Description */}
+              <p className="text-gray-500 text-sm leading-relaxed">{project.description}</p>
             </motion.div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

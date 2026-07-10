@@ -1,114 +1,137 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowRight, Mail } from 'lucide-react';
-import { Link as ScrollLink } from 'react-scroll';
+import Image from 'next/image';
+import { useContactModal } from '@/contexts/ContactModalContext';
+
+const particles = Array.from({ length: 20 }, (_, i) => ({
+  id: i,
+  x: Math.random() * 100,
+  y: Math.random() * 100,
+  size: Math.random() * 3 + 1.5,
+  duration: Math.random() * 6 + 5,
+  delay: Math.random() * 4,
+}));
 
 export default function Hero() {
+  const { open } = useContactModal();
+
   return (
-    <div
+    <section
       id="hero"
-      className="w-full min-h-screen bg-[#f6f5f3] px-6 md:px-12 lg:px-20  py-14 lg:py-20 flex flex-col md:flex-row items-center justify-between relative overflow-hidden"
+      className="min-h-screen flex items-center bg-white px-6 md:px-16 lg:px-28 relative overflow-hidden"
     >
-      {/* Decorative Blobs */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-        <div className="absolute top-24 left-16 w-40 h-40 rounded-full bg-amber-500 mix-blend-multiply filter blur-2xl animate-blob" />
-        <div className="absolute top-1/3 right-16 w-48 h-48 rounded-full bg-cyan-500 mix-blend-multiply filter blur-2xl animate-blob animation-delay-2000" />
-        <div className="absolute bottom-20 left-1/3 w-52 h-52 rounded-full bg-amber-600 mix-blend-multiply filter blur-2xl animate-blob animation-delay-4000" />
-      </div>
+      {/* Dot particles */}
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full bg-cyan-700 opacity-20 pointer-events-none"
+          style={{
+            width: p.size,
+            height: p.size,
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+          }}
+          animate={{
+            y: [0, -18, 0],
+            x: [0, 6, 0],
+            opacity: [0.15, 0.35, 0.15],
+          }}
+          transition={{
+            duration: p.duration,
+            delay: p.delay,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
 
-      {/* Left Side */}
-      <motion.div
-        initial={{ opacity: 0, x: -30 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-        className="flex flex-col justify-center md:w-1/2 w-full space-y-6 relative z-10"
-      >
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
-          Hi , <span className="text-[#161b22]">My name is Raj Roka </span>
-        </h1>
-        <p className="text-base sm:text-lg lg:text-xl text-gray-800 max-w-lg">
-          I design and build modern, performant websites with Next.js, React, and Tailwind CSS. Let’s create something exceptional.
-        </p>
-        <div className="flex flex-wrap gap-4">
-         <ScrollLink
-  to="projects" // ID of the target section
-  smooth={true}
-  duration={500}
-  offset={-70} // Optional: adjust for fixed navbar
-  className="flex items-center gap-2 px-6 py-3 bg-[#161b22] text-white rounded-lg hover:bg-cyan-700 transition-all duration-300 shadow-md cursor-pointer"
->
-  <ArrowRight size={18} />
-  View Projects
-</ScrollLink>
+      <div className="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-12">
 
-         <ScrollLink
-  to="contact" // ID of the target section
-  smooth={true}
-  duration={500}
-  offset={-70} // Optional: adjust for fixed navbar
-  className="flex items-center gap-2 px-6 py-3 bg-[#161b22] font-poppins text-white rounded-lg hover:bg-cyan-700 transition-all duration-300 shadow-md cursor-pointer"
->
-  <ArrowRight size={18} />
-  Contact  
-</ScrollLink>
-        </div>
-        <div className="flex items-center flex-wrap gap-3 mt-6">
-          {['Next.js', 'React', 'Tailwind' , 'Mongodb' , 'Zustand' ,'Redux' , 'node'].map((tech) => (
-            <span
-              key={tech}
-              className="px-3 py-1 text-white bg-gray-800 rounded-full text-sm font-medium shadow-sm"
+        {/* Left — Text */}
+        <div className="flex-1">
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="text-gray-500 text-base mb-3"
+          >
+            Hey, I&apos;m Raj 👋
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-5xl md:text-6xl font-black leading-tight mb-2 text-gray-900"
+          >
+            Raj Roka
+          </motion.h1>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="text-xl md:text-2xl font-semibold text-cyan-700 mb-5"
+          >
+            Full-Stack Developer
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-gray-500 text-base max-w-lg mb-8 leading-relaxed"
+          >
+            Building scalable web applications with modern technologies. I develop fast,
+            responsive, and production-ready applications using Next.js, TypeScript,
+            Node.js, MongoDB, and cloud technologies.
+          </motion.p>
+
+          {/* Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-wrap gap-4"
+          >
+            <a
+              href="/#projects"
+              className="bg-cyan-700 hover:bg-cyan-800 text-white font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
             >
-              {tech}
-            </span>
-          ))}
+              View My Work
+            </a>
+            <a
+              href="/Raj_Roka_Resume.pdf"
+              download="Raj_Roka_Resume.pdf"
+              className="border border-gray-300 hover:border-cyan-700 hover:text-cyan-700 text-gray-800 font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+            >
+              Download Resume
+            </a>
+          </motion.div>
         </div>
-      </motion.div>
 
-      {/* Right Side: Image */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="flex justify-center items-center md:w-1/2 w-full mt-12 md:mt-0 relative z-10"
-      >
-        <div className="relative">
-          <div className="absolute  rounded-3xl blur-2xl scale-105" />
-          <Image
-            src="/p.jpg"
-            alt="Portfolio preview"
-            width={420}
-            height={420}
-            className="rounded-2xl object-cover w-full max-w-xs md:max-w-sm h-auto shadow-2xl border-4 border-white"
-            priority
-          />
-        </div>
-      </motion.div>
+        {/* Right — Photo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex-shrink-0"
+        >
+          <div className="w-72 h-72 md:w-96 md:h-96 rounded-full border-2 border-gray-300 flex items-center justify-center">
+            <div className="relative w-60 h-60 md:w-80 md:h-80 rounded-full overflow-hidden">
+              <Image
+                src="/p.jpg"
+                alt="Raj Roka"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+        </motion.div>
 
-      <style jsx global>{`
-        @keyframes blob {
-          0%,
-          100% {
-            transform: translate(0px, 0px) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-        }
-        .animate-blob {
-          animation: blob 9s ease-in-out infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-      `}</style>
-    </div>
+      </div>
+    </section>
   );
 }
