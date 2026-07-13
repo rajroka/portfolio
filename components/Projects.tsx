@@ -23,7 +23,7 @@ const staticProjects: ProjectData[] = [
       'Full-stack e-commerce solution with Next.js, Stripe integration, and inventory management.',
     tags: ['Next.js', 'Tailwind CSS', 'Stripe', 'MongoDB'],
     githubUrl: 'https://github.com/rajroka/e-commerce.git',
-    liveUrl: 'https://e-commerce-8ghl.vercel.app/',
+    liveUrl: 'https://e-commerce-yq58.vercel.app/',
   },
   {
     _id: '2',
