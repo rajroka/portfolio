@@ -49,14 +49,14 @@ export default function AdminLoginPage() {
     <div className="min-h-screen bg-[#0d1117] flex items-center justify-center px-4">
       {/* Background blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-cyan-500 filter blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-orange-500 filter blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-72 h-72 rounded-full bg-amber-500 filter blur-3xl" />
       </div>
 
       <div className="relative w-full max-w-md">
         {/* Logo / heading */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-cyan-500 mb-4 shadow-lg shadow-cyan-500/30">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-orange-500 mb-4 shadow-lg shadow-orange-500/30">
             <FiLock className="text-white text-2xl" />
           </div>
           <h1 className="text-3xl font-bold text-white">Admin Login</h1>
@@ -84,7 +84,7 @@ export default function AdminLoginPage() {
                       message: 'Invalid email address',
                     },
                   })}
-                  className="w-full pl-10 pr-4 py-3 bg-[#0d1117] border border-[#30363d] rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition"
+                  className="w-full pl-10 pr-4 py-3 bg-[#0d1117] border border-[#30363d] rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
                   placeholder="admin@portfolio.com"
                 />
               </div>
@@ -105,7 +105,7 @@ export default function AdminLoginPage() {
                   type={showPassword ? 'text' : 'password'}
                   autoComplete="current-password"
                   {...register('password', { required: 'Password is required' })}
-                  className="w-full pl-10 pr-12 py-3 bg-[#0d1117] border border-[#30363d] rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition"
+                  className="w-full pl-10 pr-12 py-3 bg-[#0d1117] border border-[#30363d] rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
                   placeholder="••••••••"
                 />
                 <button
@@ -126,7 +126,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex items-center justify-center gap-2 py-3 px-6 bg-cyan-500 hover:bg-cyan-600 disabled:bg-cyan-800 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors duration-200 mt-2"
+              className="w-full flex items-center justify-center gap-2 py-3 px-6 bg-orange-500 hover:bg-orange-600 disabled:bg-orange-800 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors duration-200 mt-2"
             >
               {isSubmitting ? (
                 <>
@@ -148,7 +148,7 @@ export default function AdminLoginPage() {
 
         {/* Back link */}
         <p className="text-center mt-6">
-          <a href="/" className="text-sm text-gray-500 hover:text-cyan-400 transition-colors">
+          <a href="/" className="text-sm text-gray-500 hover:text-orange-400 transition-colors">
             ← Back to portfolio
           </a>
         </p>

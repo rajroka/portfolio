@@ -39,8 +39,8 @@ const statCards = (stats: Stats) => [
     label: 'Projects',
     value: stats.projects,
     icon: FiBriefcase,
-    color: 'text-cyan-400',
-    bg: 'bg-cyan-500/10 border-cyan-500/20',
+    color: 'text-orange-400',
+    bg: 'bg-orange-500/10 border-orange-500/20',
     href: '/admin/dashboard/projects',
   },
   {
@@ -87,7 +87,7 @@ const statCards = (stats: Stats) => [
 ];
 
 const quickActions = [
-  { label: 'Edit Hero', href: '/admin/dashboard/hero', color: 'bg-cyan-500 hover:bg-cyan-600' },
+  { label: 'Edit Hero', href: '/admin/dashboard/hero', color: 'bg-orange-500 hover:bg-orange-600' },
   { label: 'Add Project', href: '/admin/dashboard/projects/new', color: 'bg-violet-500 hover:bg-violet-600' },
   { label: 'Add Skill', href: '/admin/dashboard/skills/new', color: 'bg-emerald-500 hover:bg-emerald-600' },
   { label: 'View Messages', href: '/admin/dashboard/messages', color: 'bg-orange-500 hover:bg-orange-600' },
@@ -187,7 +187,7 @@ export default function DashboardOverview() {
           </h2>
           <Link
             href="/admin/dashboard/messages"
-            className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
+            className="text-xs text-orange-400 hover:text-orange-300 flex items-center gap-1"
           >
             View all <FiArrowRight size={12} />
           </Link>
@@ -203,16 +203,16 @@ export default function DashboardOverview() {
               <Link
                 key={msg._id}
                 href={`/admin/dashboard/messages`}
-                className="flex items-start gap-3 bg-[#161b22] border border-[#30363d] rounded-xl p-4 hover:border-cyan-500/30 transition-colors"
+                className="flex items-start gap-3 bg-[#161b22] border border-[#30363d] rounded-xl p-4 hover:border-orange-500/30 transition-colors"
               >
-                <div className="w-9 h-9 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                  <FiMail size={15} className="text-cyan-400" />
+                <div className="w-9 h-9 rounded-full bg-orange-500/10 border border-orange-500/20 flex items-center justify-center flex-shrink-0">
+                  <FiMail size={15} className="text-orange-400" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium text-white truncate">{msg.name}</span>
                     {!msg.read && (
-                      <span className="text-xs bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded-full flex-shrink-0">
+                      <span className="text-xs bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded-full flex-shrink-0">
                         New
                       </span>
                     )}
@@ -264,7 +264,7 @@ export default function DashboardOverview() {
                       )}
                     </td>
                     <td className="px-4 py-3 text-right">
-                      <Link href={href} className="text-xs text-cyan-400 hover:text-cyan-300">
+                      <Link href={href} className="text-xs text-orange-400 hover:text-orange-300">
                         Manage →
                       </Link>
                     </td>

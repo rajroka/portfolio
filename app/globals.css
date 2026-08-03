@@ -1,42 +1,142 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #f4f2ec;
+  --ink: #191c22;
+  --ink-soft: #5b6370;
+  --line: #d9dee6;
+  --grid: #e9ebef;
+  --accent: #e8590c;
+  --accent-deep: #b03a0a;
+  --accent-tint: #fdeae0;
+  --panel: #14161b;
+  --panel-text: #e9ebf0;
+  --panel-soft: #8a919e;
+  --panel-line: #262b33;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-grid: var(--grid);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-tint: var(--accent-tint);
+  --color-panel: var(--panel);
+  --color-panel-text: var(--panel-text);
+  --color-panel-soft: var(--panel-soft);
+  --color-panel-line: var(--panel-line);
+  --font-sans: var(--font-archivo);
+  --font-mono: var(--font-plex);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
 html {
   scroll-behavior: smooth;
 }
 
-
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('/fonts/poppins-reg.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-archivo);
+  -webkit-font-smoothing: antialiased;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Displays get architectural width + heavy weight. */
+.display {
+  font-family: var(--font-archivo);
+  font-stretch: 125%;
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+}
+
+/* Monospace figure / data label. */
+.label {
+  font-family: var(--font-plex);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+/* Registration corner ticks — the drafting motif. */
+.corners {
+  --corner-color: #e8590c;
+  border-radius: 8px;
+  background-image:
+    linear-gradient(var(--corner-color) 0 0),
+    linear-gradient(var(--corner-color) 0 0),
+    linear-gradient(var(--corner-color) 0 0),
+    linear-gradient(var(--corner-color) 0 0),
+    linear-gradient(var(--corner-color) 0 0),
+    linear-gradient(var(--corner-color) 0 0),
+    linear-gradient(var(--corner-color) 0 0),
+    linear-gradient(var(--corner-color) 0 0);
+  background-repeat: no-repeat;
+  background-size:
+    18px 2px, 2px 18px,
+    18px 2px, 2px 18px,
+    18px 2px, 2px 18px,
+    18px 2px, 2px 18px;
+  background-position:
+    0 0, 0 0,
+    100% 0, 100% 0,
+    100% 100%, 100% 100%,
+    0 100%, 0 100%;
+}
+
+.corners:hover {
+  --corner-color: #b03a0a;
+}
+
+/* Faint drafting grid. */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.grid-bg-dark {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Index / ledger row with dotted leader to a descriptor. */
+.dot-leader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.dot-leader .dots {
+  flex: 1 1 12px;
+  min-width: 12px;
+  border-bottom: 1px dotted var(--line);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,27 +1,32 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from 'react-hot-toast';
 import Navbar from "@/components/Navbar";
 import { ContactModalProvider } from "@/contexts/ContactModalContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const archivo = Archivo({
+  variable: "--font-archivo",
+  weight: "variable",
+  axes: ["wdth"],
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plex = IBM_Plex_Mono({
+  variable: "--font-plex",
+  weight: ["400", "500"],
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Raj Roka | Portfolio",
-  description: "Full-stack developer specializing in Next.js, React, and TypeScript",
-  keywords: "Next.js, React, TypeScript, Full-stack, Portfolio",
+  title: "Raj Roka — Full-Stack Developer",
+  description:
+    "Portfolio of Raj Roka — full-stack developer shipping products end to end with Next.js, TypeScript, Node.js, and MongoDB.",
+  keywords: "Next.js, React, TypeScript, Full-stack, Portfolio, MongoDB",
   openGraph: {
-    title: "Raj Roka | Portfolio",
-    description: "Full-stack developer specializing in Next.js, React, and TypeScript",
+    title: "Raj Roka — Full-Stack Developer",
+    description:
+      "Portfolio of Raj Roka — full-stack developer shipping products end to end with Next.js, TypeScript, Node.js, and MongoDB.",
     type: "website",
   },
 };
@@ -33,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${archivo.variable} ${plex.variable} antialiased`}>
         <ContactModalProvider>
           <Navbar />
           {children}

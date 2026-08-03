@@ -1,136 +1,120 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
-import { useContactModal } from '@/contexts/ContactModalContext';
 
-const particles = Array.from({ length: 20 }, (_, i) => ({
-  id: i,
-  x: Math.random() * 100,
-  y: Math.random() * 100,
-  size: Math.random() * 3 + 1.5,
-  duration: Math.random() * 6 + 5,
-  delay: Math.random() * 4,
-}));
+const specRows = [
+  { k: 'Role', v: 'Full-Stack Developer' },
+  { k: 'Stack', v: 'Next.js · TypeScript · Node' },
+];
 
 export default function Hero() {
-  const { open } = useContactModal();
+  const reduce = useReducedMotion();
+  const rise = reduce ? undefined : { initial: { opacity: 0, y: 16 }, animate: { opacity: 1, y: 0 } };
 
   return (
-    <section
-      id="hero"
-      className="min-h-screen flex items-center bg-white px-6 md:px-16 lg:px-28 relative overflow-hidden"
-    >
-      {/* Dot particles */}
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full bg-cyan-700 opacity-20 pointer-events-none"
-          style={{
-            width: p.size,
-            height: p.size,
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-          }}
-          animate={{
-            y: [0, -18, 0],
-            x: [0, 6, 0],
-            opacity: [0.15, 0.35, 0.15],
-          }}
-          transition={{
-            duration: p.duration,
-            delay: p.delay,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
+    <section id="hero" className="relative overflow-hidden border-b border-line">
+      <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden />
+      <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-10 md:pb-28 md:pt-14">
+        <div className="grid items-center gap-14 pt-16 md:grid-cols-[1.15fr_0.85fr] md:pt-24">
+          {/* Manifest */}
+          <div>
+            <motion.h1
+              {...rise}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="display mt-5 text-[clamp(3rem,10vw,6.5rem)] text-ink"
+            >
+              Raj Roka
+            </motion.h1>
 
-      <div className="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-12">
+            <motion.p
+              {...rise}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mt-4 font-mono text-sm tracking-normal text-ink-soft"
+            >
+              Full-stack developer — systems &amp; interface
+            </motion.p>
 
-        {/* Left — Text */}
-        <div className="flex-1">
-          <motion.p
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="text-gray-500 text-base mb-3"
-          >
-            Hey, I&apos;m Raj 👋
-          </motion.p>
+            <motion.div
+              {...rise}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="corners mt-10 max-w-md border border-line bg-white/70 p-6"
+            >
+              <div className="flex flex-col gap-3.5">
+                {specRows.map((row) => (
+                  <div
+                    key={row.k}
+                    className="grid grid-cols-[72px_1fr] gap-4 font-mono text-xs tracking-normal"
+                  >
+                    <span className="text-ink-soft">{row.k}</span>
+                    <span className="text-ink">{row.v}</span>
+                  </div>
+                ))}
+                <div className="grid grid-cols-[72px_1fr] gap-4 font-mono text-xs tracking-normal">
+                  <span className="text-ink-soft">Status</span>
+                  <span className="flex items-center gap-2 text-accent">
+                    <span className="relative flex h-2 w-2" aria-hidden>
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                    </span>
+                    Open for work
+                  </span>
+                </div>
+              </div>
+            </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl md:text-6xl font-black leading-tight mb-2 text-gray-900"
-          >
-            Raj Roka
-          </motion.h1>
+            <motion.p
+              {...rise}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mt-8 max-w-md text-[15px] leading-relaxed text-ink-soft"
+            >
+              I design and ship full-stack products end to end — from the first sketch to a
+              deployed, working system. Clear architecture, fast interfaces, and code that
+              survives its first users.
+            </motion.p>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="text-xl md:text-2xl font-semibold text-cyan-700 mb-5"
-          >
-            Full-Stack Developer
-          </motion.h2>
+            <motion.div
+              {...rise}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="mt-8 flex flex-wrap gap-3"
+            >
+              <a
+                href="/#projects"
+                className="inline-flex items-center gap-2 rounded-lg bg-ink px-6 py-3 font-mono text-sm tracking-normal text-paper transition-colors hover:bg-accent"
+              >
+                View the work <span aria-hidden>↓</span>
+              </a>
+              <a
+                href="/Raj_Roka_Resume.pdf"
+                download="Raj_Roka_Resume.pdf"
+                className="inline-flex items-center gap-2 rounded-lg border border-line px-6 py-3 font-mono text-sm tracking-normal text-ink transition-colors hover:border-accent hover:text-accent"
+              >
+                Download CV <span aria-hidden>↘</span>
+              </a>
+            </motion.div>
+          </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-gray-500 text-base max-w-lg mb-8 leading-relaxed"
-          >
-            Building scalable web applications with modern technologies. I develop fast,
-            responsive, and production-ready applications using Next.js, TypeScript,
-            Node.js, MongoDB, and cloud technologies.
-          </motion.p>
-
-          {/* Buttons */}
+          {/* Drafted portrait */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-wrap gap-4"
+            initial={reduce ? false : { opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="relative"
           >
-            <a
-              href="/#projects"
-              className="bg-cyan-700 hover:bg-cyan-800 text-white font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
-            >
-              View My Work
-            </a>
-            <a
-              href="/Raj_Roka_Resume.pdf"
-              download="Raj_Roka_Resume.pdf"
-              className="border border-gray-300 hover:border-cyan-700 hover:text-cyan-700 text-gray-800 font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
-            >
-              Download Resume
-            </a>
+            <div className="corners relative border border-line bg-white/70 p-3 md:p-4">
+              <div className="relative aspect-[4/5] overflow-hidden bg-accent-tint">
+                <Image
+                  src="/p.jpg"
+                  alt="Portrait of Raj Roka"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 90vw, 40vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
           </motion.div>
         </div>
-
-        {/* Right — Photo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex-shrink-0"
-        >
-          <div className="w-72 h-72 md:w-96 md:h-96 rounded-full border-2 border-gray-300 flex items-center justify-center">
-            <div className="relative w-60 h-60 md:w-80 md:h-80 rounded-full overflow-hidden">
-              <Image
-                src="/p.jpg"
-                alt="Raj Roka"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          </div>
-        </motion.div>
-
       </div>
     </section>
   );

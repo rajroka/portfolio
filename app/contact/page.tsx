@@ -2,7 +2,7 @@
 
 import { useForm, FieldError } from 'react-hook-form';
 import { motion } from 'framer-motion';
-import { FiSend } from 'react-icons/fi';
+import { FiArrowUpRight } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 
@@ -22,7 +22,7 @@ export default function ContactPage() {
   } = useForm<FormData>();
 
   const renderError = (error: FieldError | undefined) =>
-    error ? <p className="mt-1 text-xs text-red-500">{error.message}</p> : null;
+    error ? <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.1em] text-red-600">{error.message}</p> : null;
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -43,45 +43,53 @@ export default function ContactPage() {
     }
   };
 
-  return (
-    <main className="min-h-screen bg-white flex items-center justify-center px-6 py-20">
-      <div className="w-full max-w-lg">
+  const inputClass =
+    'w-full border border-line bg-white/70 px-4 py-3 font-sans text-sm text-ink placeholder:text-ink-soft/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent';
 
-        {/* Back */}
+  return (
+    <main className="min-h-screen py-20">
+      <div className="mx-auto max-w-lg px-6">
         <Link
           href="/"
-          className="text-sm text-gray-400 hover:text-cyan-700 transition-colors mb-8 inline-block"
+          className="mt-8 inline-flex items-center gap-2 font-mono text-xs tracking-[0.12em] uppercase text-ink-soft transition-colors hover:text-accent"
         >
-          ← Back to home
+          ← Back to index
         </Link>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
+          className="mt-10"
         >
-          <h1 className="text-4xl font-black text-gray-900 mb-1">
-            Get in Touch<span className="text-cyan-700">.</span>
-          </h1>
-          <p className="text-gray-400 text-sm mb-8">
+          <h1 className="display mt-4 text-4xl text-ink md:text-5xl">Get in touch</h1>
+          <p className="mt-3 font-mono text-xs tracking-[0.1em] uppercase text-ink-soft">
             Have a project in mind? Let&apos;s talk.
           </p>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
+                <label htmlFor="contact-name" className="label mb-2 block text-ink-soft">
+                  Name
+                </label>
                 <input
+                  id="contact-name"
                   type="text"
-                  placeholder="Your Name"
+                  placeholder="John Doe"
                   {...register('name', { required: 'Name is required' })}
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:border-transparent"
+                  className={inputClass}
                 />
                 {renderError(errors.name)}
               </div>
               <div>
+                <label htmlFor="contact-email" className="label mb-2 block text-ink-soft">
+                  Email
+                </label>
                 <input
+                  id="contact-email"
                   type="email"
-                  placeholder="Your Email"
+                  placeholder="john@example.com"
                   {...register('email', {
                     required: 'Email is required',
                     pattern: {
@@ -89,28 +97,36 @@ export default function ContactPage() {
                       message: 'Invalid email',
                     },
                   })}
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:border-transparent"
+                  className={inputClass}
                 />
                 {renderError(errors.email)}
               </div>
             </div>
 
             <div>
+              <label htmlFor="contact-subject" className="label mb-2 block text-ink-soft">
+                Subject
+              </label>
               <input
+                id="contact-subject"
                 type="text"
-                placeholder="Subject"
+                placeholder="Project inquiry"
                 {...register('subject', { required: 'Subject is required' })}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:border-transparent"
+                className={inputClass}
               />
               {renderError(errors.subject)}
             </div>
 
             <div>
+              <label htmlFor="contact-message" className="label mb-2 block text-ink-soft">
+                Message
+              </label>
               <textarea
+                id="contact-message"
                 rows={5}
                 placeholder="Tell me about your project..."
                 {...register('message', { required: 'Message is required' })}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:border-transparent resize-none"
+                className={`${inputClass} resize-none`}
               />
               {renderError(errors.message)}
             </div>
@@ -118,9 +134,13 @@ export default function ContactPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex items-center justify-center gap-2 w-full py-3 bg-cyan-700 hover:bg-cyan-800 text-white font-semibold rounded-lg transition-colors disabled:opacity-60 disabled:cursor-not-allowed text-sm"
+              className="flex w-full items-center justify-center gap-2 bg-ink py-3.5 font-mono text-xs tracking-[0.14em] uppercase text-paper transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isSubmitting ? 'Sending...' : <><FiSend size={14} /> Send Message</>}
+              {isSubmitting ? 'Sending...' : (
+                <>
+                  Send message <FiArrowUpRight />
+                </>
+              )}
             </button>
           </form>
         </motion.div>

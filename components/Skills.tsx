@@ -1,66 +1,102 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
-const skillCategories = [
+interface Skill {
+  name: string;
+}
+
+interface Layer {
+  layer: string;
+  items: Skill[];
+}
+
+const skillLayers: Layer[] = [
   {
-    title: 'Frontend',
-    skills: ['HTML / CSS', 'JavaScript', 'TypeScript', 'React.js', 'Next.js', 'Tailwind CSS'],
+    layer: 'Layer 01 — Frontend',
+    items: [
+      { name: 'Next.js' },
+      { name: 'React.js' },
+      { name: 'TypeScript' },
+      { name: 'Tailwind CSS' },
+      { name: 'HTML / CSS' },
+    ],
   },
   {
-    title: 'Backend',
-    skills: ['Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'JWT Auth'],
+    layer: 'Layer 02 — Backend',
+    items: [
+      { name: 'Node.js' },
+      { name: 'Express.js' },
+      { name: 'MongoDB' },
+      { name: 'REST APIs' },
+      { name: 'JWT Auth' },
+    ],
   },
   {
-    title: 'Tools & Others',
-    skills: ['Git & GitHub', 'Vercel', 'Cloudinary', 'Figma', 'VS Code'],
+    layer: 'Layer 03 — Tooling',
+    items: [
+      { name: 'Git & GitHub' },
+      { name: 'Vercel' },
+      { name: 'Cloudinary' },
+      { name: 'Figma' },
+      { name: 'VS Code' },
+    ],
   },
   {
-    title: 'Soft Skills',
-    skills: ['Problem Solving', 'Communication', 'Collaboration', 'Commitment', 'Fast Learner'],
+    layer: 'Layer 04 — Practice',
+    items: [
+      { name: 'Problem solving' },
+      { name: 'Communication' },
+      { name: 'Collaboration' },
+      { name: 'Commitment' },
+      { name: 'Fast learner' },
+    ],
   },
 ];
 
 export default function Skills() {
+  const reduce = useReducedMotion();
+
   return (
-    <section id="skills" className="py-20 px-6 md:px-16 lg:px-28 bg-white">
-      <div className="max-w-6xl mx-auto">
-
-        {/* Section Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+    <section id="skills" className="grid-bg scroll-mt-16 border-t border-line py-24">
+      <div className="mx-auto max-w-6xl px-6">
+        <motion.header
+          initial={reduce ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-4xl md:text-5xl font-black text-gray-900 mb-12"
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.45 }}
+          className="mb-14 border-b border-line pb-8"
         >
-          Skills<span className="text-cyan-700">.</span>
-        </motion.h2>
+          <div className="mt-4">
+            <h2 className="display text-5xl text-ink md:text-6xl">Stack</h2>
+          </div>
+        </motion.header>
 
-        {/* Categories grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
-          {skillCategories.map((category, i) => (
+        <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-4">
+          {skillLayers.map((layer, i) => (
             <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 20 }}
+              key={layer.layer}
+              initial={reduce ? false : { opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.4, delay: (i % 4) * 0.06 }}
             >
-              <h3 className="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wide">
-                {category.title}
+              <h3 className="border-b border-line pb-3 font-mono text-xs tracking-normal text-ink">
+                {layer.layer}
               </h3>
-              <ul className="space-y-2">
-                {category.skills.map((skill) => (
-                  <li key={skill} className="text-sm text-gray-500">
-                    {skill}
+              <ul className="mt-5 space-y-3">
+                {layer.items.map((skill) => (
+                  <li
+                    key={skill.name}
+                    className="font-mono text-sm tracking-normal text-ink"
+                  >
+                    {skill.name}
                   </li>
                 ))}
               </ul>
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );

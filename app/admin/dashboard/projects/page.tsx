@@ -53,7 +53,7 @@ export default function ProjectsAdmin() {
         <PageHeader title="Projects" description="Manage your portfolio projects." />
         <Link
           href="/admin/dashboard/projects/new"
-          className="flex items-center gap-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium rounded-lg transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors"
         >
           <FiPlus size={15} /> Add Project
         </Link>
@@ -64,12 +64,12 @@ export default function ProjectsAdmin() {
       ) : projects.length === 0 ? (
         <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-10 text-center">
           <p className="text-gray-500 mb-4">No projects yet.</p>
-          <Link href="/admin/dashboard/projects/new" className="text-cyan-400 hover:underline text-sm">Add your first project →</Link>
+          <Link href="/admin/dashboard/projects/new" className="text-orange-400 hover:underline text-sm">Add your first project →</Link>
         </div>
       ) : (
         <div className="grid sm:grid-cols-2 gap-4">
           {projects.map(project => (
-            <div key={project._id} className="bg-[#161b22] border border-[#30363d] rounded-xl overflow-hidden hover:border-cyan-500/30 transition-colors">
+            <div key={project._id} className="bg-[#161b22] border border-[#30363d] rounded-xl overflow-hidden hover:border-orange-500/30 transition-colors">
               {/* Image */}
               <div className="relative h-40 bg-[#0d1117]">
                 {project.image ? (
@@ -107,7 +107,7 @@ export default function ProjectsAdmin() {
                     )}
                   </div>
                   <div className="flex gap-1.5">
-                    <Link href={`/admin/dashboard/projects/${project._id}`} className="p-1.5 text-gray-400 hover:text-cyan-400 hover:bg-[#0d1117] rounded transition" title="Edit">
+                    <Link href={`/admin/dashboard/projects/${project._id}`} className="p-1.5 text-gray-400 hover:text-orange-400 hover:bg-[#0d1117] rounded transition" title="Edit">
                       <FiEdit2 size={13} />
                     </Link>
                     <button

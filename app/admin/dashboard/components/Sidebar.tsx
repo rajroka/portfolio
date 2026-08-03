@@ -90,7 +90,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
                   flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
                   ${
                     isActive
-                      ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
+                      ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
                       : 'text-gray-400 hover:text-white hover:bg-[#161b22]'
                   }
                 `}

@@ -37,6 +37,6 @@
     "@types/react-dom": "^19",
     "@types/react-scroll": "^1.8.10",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5.8.3"
   }
 }

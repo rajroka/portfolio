@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { FiExternalLink } from 'react-icons/fi';
+import { motion, useReducedMotion } from 'framer-motion';
+import { FiArrowUpRight } from 'react-icons/fi';
 
 export interface ProjectData {
   _id?: string;
@@ -51,70 +51,101 @@ interface ProjectsProps {
 }
 
 export default function Projects({ data }: ProjectsProps) {
+  const reduce = useReducedMotion();
   const projects = data && data.length > 0 ? data : staticProjects;
 
   return (
-    <section id="projects" className="py-20 px-6 md:px-16 lg:px-28 bg-white">
-      <div className="max-w-6xl mx-auto">
-
-        {/* Section Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+    <section id="projects" className="scroll-mt-16 border-t border-line py-24">
+      <div className="mx-auto max-w-6xl px-6">
+        <motion.header
+          initial={reduce ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-4xl md:text-5xl font-black text-gray-900 mb-12"
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.45 }}
+          className="mb-14 border-b border-line pb-8"
         >
-          Projects<span className="text-cyan-700">.</span>
-        </motion.h2>
+          <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
+            <h2 className="display text-5xl text-ink md:text-6xl">Projects</h2>
+          </div>
+        </motion.header>
 
-        {/* Project Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid gap-6 md:grid-cols-2">
           {projects.map((project, index) => (
-            <motion.div
+            <motion.article
               key={project._id ?? index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={reduce ? false : { opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group"
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.45, delay: (index % 2) * 0.08 }}
+              className="corners group border border-line bg-white/70 p-5 transition-colors hover:border-accent"
             >
-              {/* Image container — gray bg with cyan accent corner */}
-              <div className="relative w-full h-52 bg-gray-100 rounded-xl overflow-hidden mb-4">
-                {project.image ? (
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                    No image
-                  </div>
-                )}
-              
-              </div>
-
-              {/* Title + link */}
-              <div className="flex items-center gap-2 mb-1">
-                <h3 className="text-lg font-bold text-gray-900">{project.title}</h3>
+              <div className="flex items-center justify-between font-mono text-sm tracking-normal">
                 {project.liveUrl && (
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-cyan-700 transition-colors"
-                    aria-label="Live site"
+                    aria-label={`Open ${project.title} live site`}
+                    className="inline-flex items-center gap-1 text-accent transition-colors hover:text-accent-deep"
                   >
-                    <FiExternalLink size={15} />
+                    Open <FiArrowUpRight />
                   </a>
                 )}
               </div>
 
-              {/* Description */}
-              <p className="text-gray-500 text-sm leading-relaxed">{project.description}</p>
-            </motion.div>
+              <div className="relative mt-4 aspect-[16/10] overflow-hidden bg-accent-tint">
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center font-mono text-xs tracking-normal text-ink-soft">
+                    No screenshot
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-line px-2 py-0.5 font-mono text-xs tracking-normal text-ink-soft"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <h3 className="display mt-5 text-2xl text-ink">{project.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-soft">{project.description}</p>
+
+              <div className="mt-5 flex gap-6 border-t border-line pt-4 font-mono text-sm tracking-normal">
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-ink-soft transition-colors hover:text-accent"
+                  >
+                    GitHub ↗
+                  </a>
+                )}
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-ink-soft transition-colors hover:text-accent"
+                  >
+                    Live site ↗
+                  </a>
+                )}
+              </div>
+            </motion.article>
           ))}
         </div>
       </div>

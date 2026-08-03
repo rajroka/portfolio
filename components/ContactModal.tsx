@@ -2,7 +2,7 @@
 
 import { useForm, FieldError } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiSend, FiX } from 'react-icons/fi';
+import { FiArrowUpRight, FiX } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 
 type FormData = {
@@ -26,7 +26,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   } = useForm<FormData>();
 
   const renderError = (error: FieldError | undefined) =>
-    error ? <p className="mt-1 text-xs text-red-400">{error.message}</p> : null;
+    error ? <p className="mt-1 font-mono text-[10px] tracking-normal text-red-600">{error.message}</p> : null;
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -48,61 +48,67 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     }
   };
 
+  const inputClass =
+    'w-full rounded-lg border border-line bg-white/70 px-4 py-3 font-sans text-sm text-ink placeholder:text-ink-soft/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent';
+
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50"
+            className="fixed inset-0 z-50 bg-ink/60 backdrop-blur-sm"
           />
 
-          {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 16 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
             className="fixed inset-0 z-50 flex items-center justify-center px-4"
             aria-modal="true"
             role="dialog"
           >
-            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-8 relative">
-              {/* Close */}
+            <div className="corners relative w-full max-w-lg border border-line bg-paper p-8 shadow-2xl">
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition-colors"
+                className="absolute right-4 top-4 rounded-lg p-1 font-mono text-sm text-ink-soft transition-colors hover:text-accent"
                 aria-label="Close"
               >
-                <FiX size={20} />
+                ✕
               </button>
 
-              <h2 className="text-2xl font-black text-gray-900 mb-1">
-                Get in Touch<span className="text-cyan-700">.</span>
-              </h2>
-              <p className="text-gray-400 text-sm mb-6">
+              <h2 className="display mt-4 text-3xl text-ink">Get in touch</h2>
+              <p className="mt-3 font-mono text-sm tracking-normal text-ink-soft">
                 Have a project in mind? Let&apos;s talk.
               </p>
 
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
+                    <label htmlFor="modal-name" className="label mb-2 block text-ink-soft">
+                      Name
+                    </label>
                     <input
+                      id="modal-name"
                       type="text"
-                      placeholder="Your Name"
+                      placeholder="John Doe"
                       {...register('name', { required: 'Name is required' })}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:border-transparent"
+                      className={inputClass}
                     />
                     {renderError(errors.name)}
                   </div>
                   <div>
+                    <label htmlFor="modal-email" className="label mb-2 block text-ink-soft">
+                      Email
+                    </label>
                     <input
+                      id="modal-email"
                       type="email"
-                      placeholder="Your Email"
+                      placeholder="john@example.com"
                       {...register('email', {
                         required: 'Email is required',
                         pattern: {
@@ -110,28 +116,36 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                           message: 'Invalid email',
                         },
                       })}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:border-transparent"
+                      className={inputClass}
                     />
                     {renderError(errors.email)}
                   </div>
                 </div>
 
                 <div>
+                  <label htmlFor="modal-subject" className="label mb-2 block text-ink-soft">
+                    Subject
+                  </label>
                   <input
+                    id="modal-subject"
                     type="text"
-                    placeholder="Subject"
+                    placeholder="Project inquiry"
                     {...register('subject', { required: 'Subject is required' })}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:border-transparent"
+                    className={inputClass}
                   />
                   {renderError(errors.subject)}
                 </div>
 
                 <div>
+                  <label htmlFor="modal-message" className="label mb-2 block text-ink-soft">
+                    Message
+                  </label>
                   <textarea
+                    id="modal-message"
                     rows={4}
                     placeholder="Tell me about your project..."
                     {...register('message', { required: 'Message is required' })}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:border-transparent resize-none"
+                    className={`${inputClass} resize-none`}
                   />
                   {renderError(errors.message)}
                 </div>
@@ -139,9 +153,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex items-center justify-center gap-2 w-full py-3 bg-cyan-700 hover:bg-cyan-800 text-white font-semibold rounded-lg transition-colors disabled:opacity-60 disabled:cursor-not-allowed text-sm"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-ink py-3.5 font-mono text-sm tracking-normal text-paper transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {isSubmitting ? 'Sending...' : <><FiSend size={14} /> Send Message</>}
+                  {isSubmitting ? 'Sending...' : (
+                    <>
+                      Send message <FiArrowUpRight />
+                    </>
+                  )}
                 </button>
               </form>
             </div>

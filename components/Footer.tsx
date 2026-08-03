@@ -1,77 +1,58 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiFacebook, FiMail } from 'react-icons/fi';
-import Link from 'next/link';
+import { FiArrowUpRight } from 'react-icons/fi';
 
-const Footer = () => {
+const socials = [
+  { name: 'Github', url: 'https://github.com/rajroka' },
+  { name: 'Linkedin', url: 'https://www.linkedin.com/in/raj-roka-4588501b9/' },
+  { name: 'Facebook', url: 'https://www.facebook.com/rajpariroka' },
+  { name: 'Email', url: 'mailto:ggcode30@gmail.com' },
+];
+
+export default function Footer() {
   const year = new Date().getFullYear();
 
-  const socialLinks = [
-    {
-      name: 'GitHub',
-      icon: <FiGithub />,
-      url: 'https://github.com/rajroka', // replace with your GitHub
-    },
-    {
-      name: 'LinkedIn',
-      icon: <FiLinkedin />,
-      url: 'https://www.linkedin.com/in/raj-roka-4588501b9/', // replace with your LinkedIn
-    },
-    {
-      name: 'Facebook',
-      icon: <FiFacebook />,
-      url: 'https://www.facebook.com/rajpariroka', // replace with your Facebook
-    },
-    {
-      name: 'Email',
-      icon: <FiMail />,
-      url: 'ggcode30@gmail.com', // replace with your email
-    },
-  ];
-
   return (
-    <footer className="w-full bg-[#0f1115] text-white py-10 border-t border-gray-700">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-        
-        {/* Left Side: Copyright */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-sm text-gray-400">
-            © {year} Raj Roka. All rights reserved.
-          </p>
-        </motion.div>
+    <footer className="grid-bg-dark border-t border-line bg-panel text-panel-text">
+      <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <h2 className="display mt-6 text-[clamp(2.75rem,8vw,5.5rem)] text-panel-text">
+          Let&apos;s build
+          <br />
+          something.
+        </h2>
 
-        {/* Right Side: Social Links */}
-        <motion.div
-          className="flex gap-6"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true }}
+        <p className="mt-6 font-mono text-sm tracking-normal text-panel-soft">
+          Have a project in mind? Drop a line.
+        </p>
+
+        <a
+          href="mailto:ggcode30@gmail.com"
+          className="mt-6 inline-flex items-center gap-2 border-b border-accent pb-1 font-mono text-sm tracking-normal text-accent transition-colors hover:text-panel-text md:text-base"
         >
-          {socialLinks.map(({ name, icon, url }) => (
-            <motion.a
-              key={name}
-              href={url}
+          ggcode30@gmail.com <FiArrowUpRight />
+        </a>
+
+        <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-panel-line pt-6">
+          {socials.map((s) => (
+            <a
+              key={s.name}
+              href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.95 }}
-              className="text-xl text-gray-300 hover:text-white transition-colors"
-              aria-label={name}
+              className="font-mono text-sm tracking-normal text-panel-soft transition-colors hover:text-accent"
             >
-              {icon}
-            </motion.a>
+              {s.name} ↗
+            </a>
           ))}
-        </motion.div>
+        </div>
+      </div>
+
+      <div className="border-t border-panel-line">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-5 font-mono text-xs tracking-normal text-panel-soft">
+          <span>© {year} Raj Roka</span>
+          <span>Built with Next.js</span>
+        </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

@@ -106,7 +106,7 @@ export default function ProjectForm({ id }: { id?: string }) {
               type="checkbox"
               id="featured"
               {...register('featured')}
-              className="w-4 h-4 rounded border-[#30363d] bg-[#0d1117] text-cyan-500 focus:ring-cyan-500"
+              className="w-4 h-4 rounded border-[#30363d] bg-[#0d1117] text-orange-500 focus:ring-orange-500"
             />
             <label htmlFor="featured" className="text-sm text-gray-300">Mark as Featured</label>
           </div>
